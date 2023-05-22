@@ -3,55 +3,50 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('users', { 
+    await queryInterface.createTable('customers', { 
       id: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    },
-    firstname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    lastname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    street: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    number: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    zipcode: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    city: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    country: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    }, 
+        },
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true,
+        },
+        firstname: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        lastname: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        street: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        number: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        zipcode: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        city: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        country: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        }, 
     });
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('customers');
   }
 };

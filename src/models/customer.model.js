@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+import { sequelize } from "./index.js";
 import { Order } from "./order.model.js";
 
 export const Customer = sequelize.define('customer', {

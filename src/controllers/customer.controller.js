@@ -27,9 +27,9 @@ const getAllCustomers = async (req, res) => {
 
 const getCustomerById = async (req, res) => {
     try {
-        const {customerId} = req.params;
+        const {id} = req.params;
         const customer = await Customer.findOne({
-            where: {id: customerId}
+            where: {id: id}
         });
         if (customer) {
             return res.status(200).json({customer});

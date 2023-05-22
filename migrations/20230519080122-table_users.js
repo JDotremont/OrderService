@@ -1,5 +1,3 @@
-import bcrypt from 'bcrypt';
-
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
@@ -7,30 +5,30 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('users', {
       id: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
     },
     username: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
     },
     password: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     role: {
-        type: DataTypes.ENUM('admin', 'seller'),
+        type: Sequelize.ENUM('admin', 'seller'),
         allowNull: false,
     },
     image: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true,
     },
 }, {
@@ -48,11 +46,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('users');
   }
 };

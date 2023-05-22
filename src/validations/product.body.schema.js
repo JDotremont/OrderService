@@ -5,5 +5,6 @@ export const productBodySchema = yup.object({
     price: yup.number().required('Le champs price est requis'),
     qty: yup.number().required('Le champs qty est requis'),
     description: yup.string().required('Le champs description est requis'),
+    status: yup.string().required('Le champs status est requis'),
     alert: yup.number().required('Le champs alert est requis'),
 });

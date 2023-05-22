@@ -3,24 +3,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('users', { 
+    await queryInterface.createTable('orders', { 
       id: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: true,
         primaryKey: true,
         autoIncrement: true,
     },
     customerId: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+            model: 'customers',
+            key: 'id',
+        }
     },
     date: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
         allowNull: false,
     },
     status: {
-        type: DataTypes.ENUM('pending', 'paid', 'delivered', 'cancelled', 'refunded', 'delivering', 'shipped', 'processing'),
+        type: Sequelize.ENUM('pending', 'paid', 'delivered', 'cancelled', 'refunded', 'delivering', 'shipped', 'processing'),
         defaultValue: 'pending',
         allowNull: false,
     }, 
@@ -28,11 +32,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('orders');
   }
 };

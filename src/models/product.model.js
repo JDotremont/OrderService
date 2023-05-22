@@ -1,11 +1,12 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+import { sequelize } from "./index.js";
+import { Order } from "./order.model.js";
 import { OrderLine } from "./order_line.model.js";
 
 export const Product = sequelize.define('product', {
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false, 
     },
     qty: {
         type: DataTypes.INTEGER,
@@ -16,13 +17,13 @@ export const Product = sequelize.define('product', {
         allowNull: false,
     },
     price: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
-    // status: {
-    //     type: DataTypes.ENUM('in stock', 'out of stock'),
-    //     allowNull: false,
-    // },
+    status: {
+        type: DataTypes.ENUM('in stock', 'out of stock', 'running low'),
+        allowNull: false,
+    },
     alert: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -34,5 +35,21 @@ export const Product = sequelize.define('product', {
     
 });
 
-Product.hasMany(OrderLine, { foreignKey: 'productId'});
-OrderLine.belongsTo(Product, { foreignKey: 'productId' });
+Order.hasMany(OrderLine, { 
+    foreignKey: 'orderId',
+    as: 'orderLines', 
+  });
+  
+  OrderLine.belongsTo(Order, {
+    foreignKey: 'orderId',
+  });
+  
+  OrderLine.belongsTo(Product, {
+    foreignKey: 'productId',
+  });
+  
+  Product.hasMany(OrderLine, {
+    foreignKey: 'productId',
+    as: 'orderLines',
+  });
+  

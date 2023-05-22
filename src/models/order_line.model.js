@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+import { sequelize } from "./index.js";
 
 export const OrderLine = sequelize.define('order_line', {
     productId: {
@@ -15,7 +15,7 @@ export const OrderLine = sequelize.define('order_line', {
         allowNull: false,
     },
     price: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
 });
