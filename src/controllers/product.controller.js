@@ -32,9 +32,9 @@ const getAllProducts = async (req, res) => {
 
 const getProductById = async (req, res) => {
     try {
-        const {productId} = req.params;
+        const {id} = req.params;
         const product = await Product.findOne({
-            where: {id: productId}
+            where: {id: id}
         });
         if (product) {
             return res.status(200).json({product});

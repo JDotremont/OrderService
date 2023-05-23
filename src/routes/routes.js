@@ -21,18 +21,16 @@ export const routes = Router();
 // Users routes
 routes.route('/users')
     .get(jwtMiddleware, authorizationMiddleware('admin'), userController.getAllUsers)
-    .get(userController.getAllUsers)
     .post(upload.single('image'), validationMiddleware(userBodySchema),  userController.createUser)
-    .put(jwtMiddleware, authorizationMiddleware('admin'), userController.updateUser)
     
-routes.route('/users/:id')
+    routes.route('/users/:id')
     .get(jwtMiddleware, authorizationMiddleware('admin'), userController.getUserById)
     .delete(jwtMiddleware, authorizationMiddleware('admin'), userController.deleteUser)
+    .put(jwtMiddleware, authorizationMiddleware('admin'), userController.updateUser)
 
 // Customers routes
 routes.route('/customers')
     .get(jwtMiddleware, customerController.getAllCustomers)
-    .get(customerController.getAllCustomers)
     .post(validationMiddleware(customerBodySchema), jwtMiddleware, authorizationMiddleware(['seller', 'admin']), customerController.createCustomer)
 
 routes.route('/customers/:id')
@@ -43,7 +41,6 @@ routes.route('/customers/:id')
 // Products routes
 routes.route('/products')
     .get(jwtMiddleware, productController.getAllProducts)
-    .get(productController.getAllProducts)
 
 routes.route('/products')
     .post(upload.single('image'), validationMiddleware(productBodySchema), jwtMiddleware, authorizationMiddleware('admin'), productController.createProduct)
